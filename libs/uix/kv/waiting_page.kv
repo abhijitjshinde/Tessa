@@ -1,0 +1,33 @@
+<Waiting_room>:
+    name: "waiting_page"
+    MDFloatLayout:
+        md_bg_color: 1,1,1,1        
+        Image:
+            source: "assets/img/selection.png"
+            size_hint: .9,.9
+            pos_hint: {"center_x":.5,"center_y":.65}
+        MDLabel:
+            text: "Hi There"
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            font_size: "23sp"
+            pos_hint:{"center_y":.41}
+            halign:"center"
+            color: rgba(85/255,163/255,181/255,255)
+        MDLabel:
+            text: "You do not have any Group registered, Please connect with your Group president to add you in Group."
+            # markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "13sp"
+            size_hint_x:.85
+            pos_hint:{"center_y":.33,"center_x":.5}
+            halign:"center"
+            color: rgba(127,127,127,255)
+        # MDFloatingActionButton:
+        #     icon: "arrow-left"
+        #     md_bg_color: "#AA8ADA"
+        #     pos_hint:{"center_y":.21,"center_x":.5}
+        #     halign:"center"
+        #     on_release:
+        #         app.screen_manager.change_screen("land")
+        
+        

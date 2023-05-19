@@ -1,0 +1,66 @@
+<Landing_Screen>:
+    name: "land"
+    MDFloatLayout:
+        md_bg_color: 1,1,1,1
+        Image:
+            source: "assets/img/icon_LS.png"
+            pos_hint: {"center_x":.5,"center_y":.90}
+            size_hint_x: 0.4
+            # allow_stretch: True
+        Image:
+            source: "assets/img/login2.png"
+            size_hint: .9,.9
+            pos_hint: {"center_x":.5,"center_y":.65}
+        MDLabel:
+            text: "H e l l o   !"
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            font_size: "23sp"
+            pos_hint:{"center_y":.45}
+            halign:"center"
+            color: rgba(85/255,163/255,181/255,255)
+        MDLabel:
+            text: "Join us,together will create future which leads to bright life for us."
+            # markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "13sp"
+            size_hint_x:.85
+            pos_hint:{"center_y":.38,"center_x":.5}
+            halign:"center"
+            color: rgba(127,127,127,255)
+        Button:
+            text: "LOGIN"
+            pos_hint:{"center_x":.5,"center_y":.25}
+            size_hint:.66,.065
+            background_color:0,0,0,0
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            on_release:
+                app.screen_manager.change_screen("login")
+            canvas.before:
+                Color:
+                    rgb: rgba(242, 129, 42)
+                RoundedRectangle:
+                    size:self.size
+                    pos:self.pos
+                    radius:[5]  
+        Button:
+            text: "SIGN UP"
+            pos_hint:{"center_x":.5,"center_y":.15}
+            size_hint:.66,.065
+            background_color:0,0,0,0
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            color: rgba(242, 129, 42)
+            on_release:
+                app.screen_manager.change_screen("signup")
+            canvas.before:
+                Color:
+                    rgb: rgba(242, 129, 42)
+                Line:
+                    width:1.01
+                    rounded_rectangle:self.x,self.y,self.width,self.height,5,5,5,5,100 
+        MDTextButton:
+            text:"Create Group"
+            pos_hint:{"center_x":0.5,"center_y":.08}
+            color: rgba(68,78,132,255)
+            font_size:"14sp"
+            on_release:
+                app.screen_manager.change_screen("registergroup") 

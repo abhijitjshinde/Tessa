@@ -1,0 +1,424 @@
+<CustomOneLineIconListItemh>
+    size_hint: .98,.73
+    # pos_hint: {"center_x": .5, "center_y": .5}
+    ripple_behavior: False
+    adaptive_size: True
+    padding: "10dp"
+    border: dp(5)
+    elevation: 0
+    # radius: 10
+    # on_release: root.show_example_list_bottom_sheet()
+    MDFloatLayout:
+        # md_bg_color: 1,1,1,1
+        FitImage:
+            id: img
+            source: root.image
+            size_hint: None, None
+            size: dp(40), dp(40)
+            radius: [self.width/2,]
+            pos_hint:{"center_x":.05,"center_y":.52}
+        MDFloatLayout:
+            # size_hint: 0.98,.16
+            # md_bg_color:rgba(0,0,0,255)
+            pos_hint:{"center_x":0.5,"center_y":.95}
+            
+            MDLabel:        
+                text:"Paid"
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "13sp"
+                # halign:"center"
+                pos_hint:{"center_x":1,"center_y":.52}
+                color:  "#7E8899"
+            MDLabel:        
+                text:"Due"
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "13sp"
+                # halign:"center"
+                pos_hint:{"center_x":1.15,"center_y":.52}
+                color:  "#7E8899"
+            
+           
+
+            MDLabel:        
+                text:"Loan"
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "13sp"
+                # halign:"center"
+                pos_hint:{"center_x":1.3,"center_y":.52}
+                color: "#FF5252" if self.text=="Debit" else "#08A045"
+        
+        MDLabel:        
+            text: root.Name[0:12]+".."
+            markup:True
+            font_name: 'assets/fonts/EncodeSans-SemiBold.ttf'
+            font_size: "13sp"
+            pos_hint:{"center_x":.65,"center_y":.40}
+        MDLabel:        
+            text:str(root.Paid)
+            markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "15sp"
+            pos_hint:{"center_x":1,"center_y":.20}
+        MDLabel:        
+            text:str(root.Due)
+            markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "15sp"
+            pos_hint:{"center_x":1.15,"center_y":.20}
+        # TooltipMDIconButton:
+        #     icon: "information"
+        #     tooltip_text: root.Name
+        #     pos_hint: {"center_x":.45,"center_y":.40}
+        MDLabel:        
+            text:str(root.Loan)
+            markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "15sp"
+            pos_hint:{"center_x":1.3,"center_y":.20}
+        MDIconButton:
+            icon: "chevron-right"
+            pos_hint:{"center_x":.98,"center_y":.52}
+            on_release:
+                app.screen_manager.get_screen("holdings").KJ(root.Name)
+<TooltipMDIconButton@MDIconButton+MDTooltip>
+<Holdings>:
+    name: "holdings"
+    
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#F5F5F5"
+        MDTopAppBar:
+            title: "Tessa"
+            elevation: 2
+            pos_hint: {"top": 1}
+            md_bg_color: "#F8B22D"
+            specific_text_color: "#4a4939"
+            left_action_items: [["menu", lambda x: (nav_drawer.set_state("open") if root.usertype == "Admin" else nav_drawer_member.set_state("open"))]]
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(20)
+            MDBoxLayout:
+                adaptive_size: True
+                # size_hint: 1,.18
+                spacing: "12dp"
+                
+
+                MDFlatButton:
+                    id: grp
+                    text: "Group Folio"                    
+                    md_bg_color: "#F8B22D"
+                    # on_release: print("T1")
+
+
+                MDFlatButton:
+                    id: ind
+                    text: "Your Folio"
+                    md_bg_color: "#FFFFFF"                    
+                    on_release: app.screen_manager.get_screen("holdings").KJ("Abhijit Shinde",False)
+                MDIconButton:
+                    icon: "progress-download"
+                    pos_hint: {"center_x": 0.5, "center_y": .5}
+                    on_release: print("Download started...")
+        
+            MDBoxLayout:
+                adaptive_height: True
+                size_hint: 1,.4
+                # orientation: "vertical"
+
+                # MDIconButton:
+                #     icon: 'account-search'
+
+                MDCard:
+                    # size_hint: .42,1
+                    # pos_hint: {"center_x": .25, "center_y": .5}
+                    ripple_behavior: False
+                    adaptive_size: True
+                    # md_bg_color:"#999999"
+                    elevation: 2
+                    padding: "10dp"
+                    radius: 15
+                    MDFloatLayout:
+                        # md_bg_color: 1,1,1,1
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.95}
+                            
+                            MDLabel:        
+                                text:"Total Paid"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Total Due"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.90,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Total Loan"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":1.25,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.75}
+                            
+                            MDLabel:
+                                markup: True        
+                                text:"38[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:
+                                markup: True        
+                                text:"1.6[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.90,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:
+                                markup: True        
+                                text:"30[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":1.25,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.40}
+                            
+                            MDLabel:        
+                                text:"Total Penalty"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Total Interest"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":1.20,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.20}
+                            
+                            MDLabel:        
+                                text:"999K"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"999K"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":1.20,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            
+            
+
+            RecycleView:
+                id: hv
+                key_viewclass: 'viewclass'
+                key_size: 'height'
+
+                RecycleBoxLayout:
+                    spacing: dp(10)
+                    padding: dp(10)
+                    default_size: None, dp(70)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+
+    # MDFloatLayout:
+    #     adaptive_size: True
+    #     pos_hint:{"center_x":0.90,"center_y":.85}
+    #     # md_bg_color: "#F8B22D"
+    #     MDIconButton:
+    #         icon: "progress-download"
+    #         pos_hint: {"center_x": 0.5, "center_y": .5}
+    #         on_release: print("Download started...")
+
+
+
+
+
+
+
+
+# Navigation drower    
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+            DrawerClickableItem:
+                icon: "account-cog"
+                text: "Admin"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("admin")
+            # DrawerClickableItem:
+            #     icon: "list-box"
+            #     text: "Member List"
+            #     on_release:
+            #         nav_drawer.set_state("close")
+            #         app.screen_manager.change_screen("memberlist")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("profile")
+
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+
+    # left_action_items: [["menu", lambda x: (nav_drawer.set_state("open") if root.usertype == "Admin" else nav_drawer_member.set_state("open"))]]
+    MDNavigationDrawer:
+        id: nav_drawer_member
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("profile")
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#F8B22D"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#F8B22D"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True

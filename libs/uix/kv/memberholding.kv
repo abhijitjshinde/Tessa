@@ -1,0 +1,227 @@
+<CustomOneLineIconListItemmh>
+    size_hint: .98,.73
+    # pos_hint: {"center_x": .5, "center_y": .5}
+    ripple_behavior: False
+    adaptive_size: True
+    padding: "10dp"
+    border: dp(5)
+    # elevation: 2
+    # radius: 10
+    # on_release: root.show_example_list_bottom_sheet()
+    MDFloatLayout:
+        # md_bg_color: 1,1,1,1MDFlatButton
+        
+        MDFloatLayout:
+            # size_hint: 0.98,.16
+            # md_bg_color:rgba(0,0,0,255)
+            pos_hint:{"center_x":0.5,"center_y":.95}
+            
+            MDLabel:        
+                text:root.Date
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "13sp"
+                # halign:"center"
+                pos_hint:{"center_x":0.95,"center_y":.50}
+                color:  "#7E8899"
+            MDLabel:        
+                text:"Amount"
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "13sp"
+                # halign:"center"
+                pos_hint:{"center_x":.60,"center_y":.50}
+                color:  "#7E8899"
+
+        
+            MDLabel:        
+                text:str(root.txn_type)
+                markup:True
+                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                font_size: "13sp"
+                pos_hint:{"center_x":1.35,"center_y":.50}
+                color: "#FF5252" if self.text=="Debit" else "#08A045"
+        # MDLabel:        
+        #     text: root.Date
+        #     markup:True
+        #     font_name: 'assets/fonts/Roboto-Regular.ttf'
+        #     font_size: "13sp"
+        #     pos_hint:{"center_x":.65,"center_y":.40}
+        MDLabel:        
+            text:str(root.Amount)
+            markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "15sp"
+            pos_hint:{"center_x":.60,"center_y":.18}
+        # MDLabel:        
+        #     text:str(root.Due)
+        #     markup:True
+        #     font_name: 'assets/fonts/Roboto-Regular.ttf'
+        #     font_size: "13sp"
+        #     pos_hint:{"center_x":1.15,"center_y":.20}
+        # TooltipMDIconButton:
+        #     icon: "information"
+        #     tooltip_text: root.Name
+        #     pos_hint: {"center_x":.45,"center_y":.40}
+        
+# <TooltipMDIconButton@MDIconButton+MDTooltip>
+<Member_holdings>:
+    name: "memberholdings"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color:"#F5F5F5" 
+        MDTopAppBar:
+            title: root.member_name
+            # elevation: 4
+            pos_hint: {"top": 1}
+            md_bg_color: "#F5F5F5"
+            # specific_text_color: "#4a4939"
+            left_action_items: [["chevron-left", lambda x: root.pre_screen()]]
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(20)
+            MDBoxLayout:
+                adaptive_size: True
+                spacing: "12dp"
+
+                MDFlatButton:
+                    id: grp
+                    text: "Group Folio"
+                    md_bg_color: "#FFFFFF"                                      
+                    on_release: app.screen_manager.change_screen("holdings")
+
+
+                MDFlatButton:
+                    id: ind
+                    text: "Your Folio"
+                    md_bg_color: "#F8B22D"
+                   
+                    
+
+            MDBoxLayout:
+                adaptive_height: True
+                size_hint: 1,.4
+
+                # MDIconButton:
+                #     icon: 'account-search'
+
+                MDCard:
+                    # size_hint: .42,1
+                    # pos_hint: {"center_x": .25, "center_y": .5}
+                    ripple_behavior: False
+                    adaptive_size: True
+                    # md_bg_color:"#999999"
+                    elevation: 1
+                    padding: "10dp"
+                    radius: 15
+                    MDFloatLayout:
+                        # md_bg_color: 1,1,1,1
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.95}
+                            
+                            MDLabel:        
+                                text:"Total Paid"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Total Due"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.90,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Total Loan"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":1.25,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.75}
+                            
+                            MDLabel:
+                                markup: True        
+                                text:"38[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:
+                                markup: True        
+                                text:"1.6[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.90,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:
+                                markup: True        
+                                text:"30[font=assets//fonts/Roboto-Regular.ttf]K[/font]"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":1.25,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.40}
+                            
+                            MDLabel:        
+                                text:"Penalty Paid"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"Interest Paid"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "13sp"
+                                pos_hint:{"center_x":1.20,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                        MDFloatLayout:
+                            size_hint: 0.98,.18
+                            pos_hint:{"center_x":0.5,"center_y":.20}
+                            
+                            MDLabel:        
+                                text:"-"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":0.55,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            MDLabel:        
+                                text:"-"
+                                font_name: 'assets/fonts/Roboto-Regular.ttf'
+                                font_size: "20sp"
+                                pos_hint:{"center_x":1.20,"center_y":.01}
+                                color: rgba(1,1,1,255)
+                            
+            
+
+            RecycleView:
+                id: mhv
+                key_viewclass: 'viewclass'
+                key_size: 'height'
+                
+
+                RecycleBoxLayout:
+                    spacing: dp(10)
+                    padding: dp(10)
+                    default_size: None, dp(70)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    
+
+
+
+
+
+
+
+
+
+

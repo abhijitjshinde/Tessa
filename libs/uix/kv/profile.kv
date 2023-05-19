@@ -1,0 +1,82 @@
+<Profile_Screen>:
+    name: "profile"
+    MDBoxLayout:
+        # md_bg_color: app.theme_cls.primary_color
+        orientation:'vertical'
+
+        MDTopAppBar:
+            title: "Tessa"
+            elevation: 4
+            pos_hint: {"top": 1}
+            md_bg_color: "#F8B22D"
+            specific_text_color: "#4a4939"
+            # left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+            left_action_items: [ ["arrow-left", lambda x:app.screen_manager.change_screen("home")]] 
+            right_action_items: [ ["logout",lambda x:root.Logout() ]] 
+            elevation: 2
+
+        MDBoxLayout:
+            orientation:'vertical'
+            spacing: "20dp"
+            
+            MDCard:                
+                orientation:'vertical'
+                size_hint: None, None
+                size: "200dp", "200dp"
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+                Button:
+                    id:profile_image
+                    background_normal: "assets//img//blank_profile.png"
+                    background_down: "assets//img//blank_profile.png"
+                    # on_release: root.change_profile_img()
+            
+                    
+            MDList:
+
+                TwoLineAvatarIconListItem:
+                    id:profile_name
+                    text: "Name"
+                    secondary_text: "Luffy (Default Name)"
+
+                    IconLeftWidget:
+                        icon: "account"
+                    
+                    IconRightWidget:
+                        icon: "pen"
+                        # on_release: root.change_profile_data(profile_name)
+                    
+                TwoLineAvatarIconListItem:
+                    id:profile_username
+                    text: 'Username'
+                    secondary_text: "King (Default Username)"
+                    IconLeftWidget:
+                        icon: "at"
+                    
+                    IconRightWidget:
+                        icon: "pen-lock"
+                        # on_release: app.change_text_data(profile_username)
+                
+                TwoLineAvatarIconListItem:
+                    id:profile_Phone
+                    text: "Phone Number"
+                    secondary_text: "8585858588 (Default)"
+
+                    IconLeftWidget:
+                        icon: "phone"
+                    
+                    IconRightWidget:
+                        icon: "pen"
+                        # on_release: root.change_profile_data(profile_Phone)
+                
+                # TwoLineAvatarIconListItem:
+                #     id:del_media
+                #     text: "Log Out"
+                #     secondary_text: "next time need to login with Phone number and Password"
+
+                #     IconLeftWidget:
+                #         icon: "exit-to-app"
+                    
+                #     IconRightWidget:
+                #         icon: "delete-forever"
+                #         on_release: root.del_media()

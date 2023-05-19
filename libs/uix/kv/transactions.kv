@@ -1,0 +1,315 @@
+<CustomOneLineIconListItem>
+    size_hint: .98,.73
+    # pos_hint: {"center_x": .5, "center_y": .5}
+    ripple_behavior: False
+    adaptive_size: True
+    padding: "10dp"
+    border: dp(5)
+    # elevation: 2
+    # radius: 10
+    # on_release: root.show_example_list_bottom_sheet()
+    MDFloatLayout:
+        # md_bg_color: 1,1,1,1
+        MDFloatLayout:
+            # size_hint: 0.98,.16
+            # md_bg_color:rgba(0,0,0,255)
+            pos_hint:{"center_x":0.5,"center_y":.95}
+            
+            MDLabel:        
+                text:root.Date
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "15sp"
+                # halign:"center"
+                pos_hint:{"center_x":.55,"center_y":.52}
+                color:  "#7E8899"
+
+            MDLabel:        
+                text:root.txn_type
+                # halign: "left"
+                font_name: 'assets/fonts/EncodeSans-Regular.ttf'
+                font_size: "15sp"
+                # halign:"center"
+                pos_hint:{"center_x":1.3,"center_y":.52}
+                color: "#FF5252" if self.text=="Debit" else "#08A045"
+        
+        MDLabel:        
+            text: root.Name
+            markup:True
+            font_name: 'assets/fonts/EncodeSans-SemiBold.ttf'
+            font_size: "18sp"
+            pos_hint:{"center_x":.55,"center_y":.20}
+        MDLabel:        
+            text:str(root.Amount)
+            markup:True
+            font_name: 'assets/fonts/EncodeSans-SemiBold.ttf'
+            font_size: "18sp"
+            pos_hint:{"center_x":1.3,"center_y":.20}
+<FilterContent>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    # MDLabel:
+        # text: "Add Transactions"
+        # # markup:True
+        # font_name: 'assets/fonts/Roboto-Regular.ttf'
+        # font_size: "12sp"
+        # halign:"center"
+        # pos_hint:{"center_y":.95}
+        # color: rgba(248, 178, 45,255)
+    MDDropDownItem:
+        id: Date
+        # pos_hint: {'center_x': .5, 'center_y': .5}
+        text: 'Select Date range'
+        on_release: root.show_date_picker()
+    MDDropDownItem:
+        id: member
+        # pos_hint: {'center_x': .5, 'center_y': .5}
+        text: 'All Member'
+        on_release: root.open_menu("member")
+    MDDropDownItem:
+        id: txn_type
+        # pos_hint: {'center_x': .5, 'center_y': .5}
+        text: 'All'
+        on_release: root.open_menu("txn_type")
+    
+<Transactions>:
+    name: "transactions"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#F5F5F5"
+        MDTopAppBar:
+            title: "Tessa"
+            elevation: 2
+            pos_hint: {"top": 1}
+            md_bg_color: "#F8B22D"
+            specific_text_color: "#4a4939"
+            left_action_items: [["menu", lambda x: (nav_drawer.set_state("open") if root.usertype == "Admin" else nav_drawer_member.set_state("open"))]]
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(20)
+
+            MDBoxLayout:
+                adaptive_height: True
+
+                # MDIconButton:
+                #     icon: 'account-search'
+
+                MDTextField:
+                    id: search_field
+                    hint_text: 'Search Transaction'
+                    # mode: "round"
+                    on_text: root.set_txns(self.text, True)
+                
+                MDIconButton:
+                    icon: 'filter-menu'
+                    on_release: root.show_confirmation_dialog()
+            
+
+            RecycleView:
+                id: rv
+                key_viewclass: 'viewclass'
+                key_size: 'height'
+
+                RecycleBoxLayout:
+                    spacing: dp(10)
+                    padding: dp(10)
+                    default_size: None, dp(70)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+
+
+
+
+
+
+
+
+
+
+# Navigation drower    
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+            DrawerClickableItem:
+                icon: "account-cog"
+                text: "Admin"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("admin")
+            # DrawerClickableItem:
+            #     icon: "list-box"
+            #     text: "Member List"
+            #     on_release:
+            #         nav_drawer.set_state("close")
+            #         app.screen_manager.change_screen("memberlist")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("profile")
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+
+    MDNavigationDrawer:
+        id: nav_drawer_member
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+
+            # DrawerClickableItem:
+            #     icon: "account-cog"
+            #     text: "Admin"
+            #     on_release:
+            #         nav_drawer.set_state("close")
+            #         app.screen_manager.change_screen("admin")
+            # DrawerClickableItem:
+            #     icon: "list-box"
+            #     text: "Member List"
+            #     on_release:
+            #         nav_drawer.set_state("close")
+            #         app.screen_manager.change_screen("memberlist")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("profile")
+
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#F8B22D"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#F8B22D"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True

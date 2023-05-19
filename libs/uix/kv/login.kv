@@ -1,0 +1,114 @@
+<Login_Screen>:
+    name: "login"
+    MDFloatLayout:
+        md_bg_color: 1,1,1,1
+        MDIconButton:
+            icon:"arrow-left"
+            pos_hint:{"center_y":.95}
+            user_font_size:"30sp"
+            theme_text_color:"Custom"
+            text_color: rgba(26,24,58,255)
+            on_release:
+                app.screen_manager.change_screen("land")
+        MDLabel:
+            text: "W e l c o m e   !"
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            font_size: "26sp"
+            pos_hint:{"center_x":0.5,"center_y":.85}
+            halign:"center"
+            color: rgba(0,0,59,255)
+        MDLabel:
+            text: "Sign in to continue."
+            # markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "17sp"
+            halign:"center"
+            pos_hint:{"center_y":.79}
+            color: rgba(248, 178, 45,255)
+        MDFloatLayout:
+            size_hint: .7,.07
+            pos_hint:{"center_x":0.5,"center_y":.63}
+            MDTextField:
+                id: Phone
+                hint_text: "Phone Number"
+                max_text_length: 10
+                input_filter: "int"
+                pos_hint:{"center_x":.43,"center_y":0.5}
+            
+        MDFloatLayout:
+            size_hint: .7,.07
+            pos_hint:{"center_x":0.5,"center_y":.5}
+            MDTextField:
+                id: Password
+                hint_text: "Password"
+                # max_text_length: 10
+                # input_filter: "int"
+                password:True
+                pos_hint:{"center_x":.43,"center_y":0.5}
+            MDIconButton:
+                icon: "eye-off"
+                pos_hint: {"center_y": .5}
+                pos: Password.width - self.width + dp(8), 0
+                theme_text_color: "Hint"
+                pos_hint:{"center_x":.98,"center_y":0.5}
+                on_release:
+                    self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                    Password.password = False if Password.password is True else True
+                
+            # TextInput:
+            #     id: Password
+            #     hint_text:"Password"
+            #     font_name: 'assets/fonts/Roboto-Regular.ttf'
+            #     # input_type: "number"
+            #     size_hint_y:.75
+            #     pos_hint:{"center_x":.43,"center_y":0.5}
+            #     background_color:1,1,1,0
+            #     foreground_color: rgba(0,0,59,255)
+            #     cursor_color:rgba(0,0,59,255)
+            #     font_size:"14sp"
+            #     cursor_width:"2sp"
+            #     multiline:False
+            #     password:True
+            # MDFloatLayout:
+            #     pos_hint:{"center_x":.45,"center_y":0}
+            #     size_hint_y:.03
+            #     md_bg_color:rgba(175,175,175,255)
+        Button:
+            text: "LOGIN"
+            pos_hint:{"center_x":.5,"center_y":.33}
+            size_hint:.66,.065
+            background_color:0,0,0,0
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+            on_release:
+                root.sign_in(Phone.text,Password.text)
+                # app.screen_manager.change_screen("home")
+            canvas.before:
+                Color:
+                    rgb: rgba(242, 129, 42)
+                RoundedRectangle:
+                    size:self.size
+                    pos:self.pos
+                    radius:[5]
+        MDTextButton:
+            text:"Forgot Password ?"
+            pos_hint:{"center_x":0.5,"center_y":.25}
+            color: rgba(68,78,132,255)
+            font_size:"14sp"
+            on_release:
+                app.screen_manager.change_screen("forgot")
+        MDLabel:
+            text: "OR"
+            # markup:True
+            font_name: 'assets/fonts/Roboto-Regular.ttf'
+            font_size: "14sp"
+            halign:"center"
+            pos_hint:{"center_y":.20}
+            color: rgba(135,133,193,255)
+        MDTextButton:
+            text:"Sign Up"
+            pos_hint:{"center_x":0.5,"center_y":.15}
+            color: rgba(68,78,132,255)
+            font_size:"14sp"
+            on_release:
+                app.screen_manager.change_screen("signup")
+            

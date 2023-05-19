@@ -1,0 +1,384 @@
+<Member_add>:
+    name: "admin"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            title: "Tessa"
+            elevation: 4
+            pos_hint: {"top": 1}
+            md_bg_color: "#F8B22D"
+            specific_text_color: "#4a4939"
+            left_action_items: [["menu", lambda x: (nav_drawer.set_state("open") if root.usertype == "Admin" else nav_drawer_member.set_state("open"))]]
+
+        MDBottomNavigation:
+            id: android_tabs
+            # selected_color_background: "orange"
+            text_color_active: "orange"
+            MDBottomNavigationItem:        
+                name: "addtransactions"
+                text: f"Add Records" 
+                icon: "cog-transfer-outline"
+                MDFloatLayout:
+                    md_bg_color: 1,1,1,1
+                    
+                    MDLabel:
+                        text: "Add Transactions"
+                        # markup:True
+                        font_name: 'assets/fonts/Roboto-Regular.ttf'
+                        font_size: "17sp"
+                        halign:"center"
+                        pos_hint:{"center_y":.95}
+                        color: rgba(248, 178, 45,255)
+                    
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.85}
+                        MDDropDownItem:
+                            id: member
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            text: 'Select Member'
+                            on_release: root.open_menu("member")
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.78}
+                        MDDropDownItem:
+                            id: txn_type
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            text: 'Credit'
+                            on_release: root.open_menu("txn_type")
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.68}
+                        MDDropDownItem:
+                            id: category
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            text: 'Monthly'
+                            on_release: root.open_menu("category")
+
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.58}
+                        MDDropDownItem:
+                            id: txn_mode
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            text: 'Online'
+                            on_release: root.open_menu("txn_mode")
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.48}
+                        MDTextField:
+                            id: amount
+                            hint_text: "Amount"
+                            # max_text_length: 10
+                            input_filter: "int"
+                            pos_hint:{"center_x":.5,"center_y":0.5}
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.38}
+                        MDTextField:
+                            id: penalty
+                            hint_text: "Penalty"
+                            # max_text_length: 10
+                            input_filter: "int"
+                            pos_hint:{"center_x":.5,"center_y":0.5}
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.28}
+                        MDTextField:
+                            id: totalamount
+                            hint_text: "Total Amount"
+                            # max_text_length: 10
+                            input_filter: "int"
+                            pos_hint:{"center_x":.5,"center_y":0.5}
+                    Button:
+                        text: "Add Record"
+                        pos_hint:{"center_x":.5,"center_y":.15}
+                        size_hint:.66,.065
+                        background_color:0,0,0,0
+                        font_name: "assets/fonts/Poppins-Bold.ttf"
+                        on_release:
+                            root.txn_confirm()
+                        canvas.before:
+                            Color:
+                                rgb: rgba(242, 129, 42)
+                            RoundedRectangle:
+                                size:self.size
+                                pos:self.pos
+                                radius:[5]
+
+            MDBottomNavigationItem:        
+                name: "addmember"
+                text: f"Add Member" 
+                icon: "account-plus"
+                MDFloatLayout:
+                    md_bg_color: 1,1,1,1
+                    
+                    MDLabel:
+                        text: "Create a New Member"
+                        # markup:True
+                        font_name: 'assets/fonts/Roboto-Regular.ttf'
+                        font_size: "17sp"
+                        halign:"center"
+                        pos_hint:{"center_y":.89}
+                        color: rgba(248, 178, 45,255) 
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.73}
+                        MDTextField:
+                            id: Name
+                            hint_text: "Member Name"
+                            max_text_length: 26
+                            # mode: "rectangle"
+                            # required: True
+                            # helper_text_mode: "on_error"
+                            # helper_text: "Please Enter Member Name"
+                            # on_focus: root.call_pre()
+                            pos_hint:{"center_x":.5,"center_y":0.5}
+
+                    MDFloatLayout:
+                        size_hint: .7,.07
+                        pos_hint:{"center_x":0.5,"center_y":.63}
+                        MDTextField:
+                            id: Phone
+                            hint_text: "Phone number"
+                            max_text_length: 10
+                            input_filter: "int"
+                            pos_hint:{"center_x":.5,"center_y":0.5}
+                    
+                    Button:
+                        text: "Add Member"
+                        pos_hint:{"center_x":.5,"center_y":.50}
+                        size_hint:.66,.065
+                        background_color:0,0,0,0
+                        font_name: "assets/fonts/Poppins-Bold.ttf"
+                        on_release:
+                            root.add_member(Name.text,Phone.text)
+                        canvas.before:
+                            Color:
+                                rgb: rgba(242, 129, 42)
+                            RoundedRectangle:
+                                size:self.size
+                                pos:self.pos
+                                radius:[5]
+                    MDSeparator:
+                        color: rgba(135,133,193,255)
+            
+            MDBottomNavigationItem:        
+                name: "memberlist"
+                text: f"Member List" 
+                icon: "list-box"
+                RecycleView:
+                    id: rv
+                    data: []
+                    viewclass: 'ChatListItem'
+                    do_scroll_x: False
+
+                    RecycleBoxLayout:
+                        id: box
+                        orientation: 'vertical'
+                        # spacing: "8dp"
+                        size_hint_y: None
+                        height: self.minimum_size[1]
+                        # size: self.minimum_size
+                        default_size_hint: 1, None
+                        # magic value for the default height of the message
+                        default_size: None,None
+                        # key_size: '_size'
+            
+            
+
+
+    
+    
+    
+    MDNavigationDrawer:
+        id: nav_drawer_member
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("profile")
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer_member.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+    
+    
+    
+    
+    
+    
+    
+# Navigation drower    
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerHeader:
+                title: "Tessa"
+                title_color: "#4a4939"
+                text: "Create Better Future"
+                source:"assets/img/icon_L.png"
+                spacing: "4dp"
+                padding: "12dp", 0, 0, "36dp"
+            MDNavigationDrawerDivider:
+
+            DrawerClickableItem:
+                icon: "view-dashboard"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Dashboard"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("home")
+
+            DrawerClickableItem:
+                icon: "chart-pie"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "folio"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("holdings")
+            DrawerClickableItem:
+                icon: "account-cog"
+                text: "Admin"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("admin")
+            # DrawerClickableItem:
+            #     icon: "list-box"
+            #     text: "Member List"
+            #     on_release:
+            #         nav_drawer.set_state("close")
+            #         app.screen_manager.change_screen("memberlist")
+            
+            DrawerClickableItem:
+                icon: "bank-transfer"
+                text: "Transactions"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+            DrawerClickableItem:
+                icon: "bell"
+                text: "Notifications"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("notifications")
+            DrawerClickableItem:
+                icon: "swap-horizontal"
+                text: "Switch Group"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("groupselection")
+
+            DrawerClickableItem:
+                icon: "account-circle"
+                text: "Profile"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("profile")
+
+            MDNavigationDrawerDivider:
+
+            MDNavigationDrawerLabel:
+                text: "Rules and Regulations"
+
+            DrawerLabelItem:
+                icon: "information-outline"
+                text: "Rules & Regulations"
+                on_release:
+                    nav_drawer.set_state("close")
+                    app.screen_manager.change_screen("transactions")
+
+
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#F8B22D"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#F8B22D"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True
+
+<Content>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "200dp"
+    
+
+    Image:
+        source: "assets\img\\addfiles.png"
+        # size_hint: .5,.5
+        pos_hint:{"center_x":.5,"center_y":.70}
+    MDLabel:
+        text: "New Member Added..."
+        halign: "center"
+        pos_hint:{"center_x":.5,"center_y":.20}
